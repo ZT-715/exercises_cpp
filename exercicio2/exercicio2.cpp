@@ -25,120 +25,117 @@
 
 #include<stdexcept>
 
+
 struct element {
     int value;
     struct element* nx;
     struct element* pr;
-};
+}
 
 class List {
     element* node;
     int size;
 
 public:
-    List();
+    explicit List();
     int len();
     int get(int position); // position < size
     bool insert(int value);
     bool isin(int value);
     bool remove(int value);
     ~List();
-};
-
-List::List(){
-    node = nullptr;
-    size = 0;
 }
 
-bool List::insert(int value) {
-    element* cursor = node;
-    element* tmp_nd = new element;
-
-    tmp_nd->value = value;
-    tmp_nd->nx = nullptr;
-    tmp_nd->pr = nullptr;
+List::List(){
+    node {nullptr};
+    size {0};
+}
+bool List::insert(int value){
+    element* cursor {node};
+    element* new_node {new element};
+    
+    new_node->value {value};
+    new_node->nx {nullptr};
+    new_node->pr {nullptr};
 
     size++;
 
-    if (!node) {
-        node = tmp_nd;
+    if(!node){
+        node {new_node};
+        return true;
+    }
+    
+    if(node->value > new_node->values){
+        new_node->nx {cursor};
+        node->pr {new_node};
+        node {new_node};
+
         return true;
     }
 
-    if (node->value > tmp_nd->value) {
-        tmp_nd->nx = cursor;
-        node->pr = tmp_nd;
-        node = tmp_nd;
-
-        return true;
-    }
-
-    while (true) {
-        if (!cursor->nx) {
+    while(true){
+        if(!cursor->nx){
             break;
         }
-        if (cursor->nx->value >= tmp_nd->value) {
+        if(cursor->nx->value >= new_node->value){
             break;
         }
-        cursor = cursor->nx;
+        cursor {cursor->nx};
     }
-
-    if (cursor->nx) {
-        tmp_nd->nx = cursor->nx;
-        tmp_nd->nx->pr = tmp_nd;
+    
+    if(cursor->nx){
+        new_node->nx {cursor->nx};
+        new_node->nx->pr {new_node};
     }
-    cursor->nx = tmp_nd;
+    cursor->nx {new_node};
 
-    tmp_nd->pr = cursor;
-
+    new_node->pr {cursor};
+  
     return true;
 }
 
-int List::len() {
+int size(){
     return size;
 }
+int get(int position){
+   element* cursor {node};
+   
+   if(postition > size) throw std::out_of_range("List access out of range");
 
-int List::get(int position) {
-    element* cursor = node;
+   for(int i {0}; i < position; i++){
+        cursor {cursor->nx};
+   }
 
-    if (position >= size) {
-        throw std::out_of_range("List access out of range");
-    }
-
-    for (int i = 0; i < position; i++) {
-        cursor = cursor->nx;
-    }
-
-    return cursor->value;
+   return cursor->value;
 }
 
-bool List::isin(int value) {
-    element* cursor = node;
+bool isin(int value){
+    element* cursor {node};
 
-    for (int i = 0; i < size; i++) {
-        if (cursor->value == value) return true;
-        cursor = cursor->nx;
+    for(int i {0}; i < size; i++){
+        if(cursor->value == value) return true;
+        cursor {cursor->nx};
     }
     return false;
 }
 
-bool List::remove(int value) {
-    if (!isin(value)) return false;
+bool remove(int value){
+    if(!this->isin(value)) return false;
+   
+    element* tmp {nullptr};
+    element* cursor {node};
 
-    element* tmp = nullptr;
-    element* cursor = node;
+    for(int i {0}; i < size; i++){
+        if(cursor->value == value) break;
+        cursor {cursor->nx};
+    }   
 
-    for (int i = 0; i < size; i++) {
-        if (cursor->value == value) break;
-        cursor = cursor->nx;
-    }
+    tmp {cursor};
 
-    tmp = cursor;
+    cursor->pr {tmp->nx};
+    cursor->nx {tmp->pr};
 
-    cursor->pr = tmp->nx;
-    cursor->nx = tmp->pr;
-
-    if (node == tmp) node = tmp->nx;
+    if(node==tmp) node {tmp->nx};
 
     size--;
 
@@ -146,6 +143,6 @@ bool List::remove(int value) {
     return true;
 }
 
-List::~List() {
-    while (size > 0) remove(get(0));
+List::~List(){
+    while(size > 0) remove(get(0));
 }
