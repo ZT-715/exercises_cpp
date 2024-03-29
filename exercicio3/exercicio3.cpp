@@ -15,6 +15,7 @@
    pontos; caso as dimensões sejam reduzidas, apenas elimine as linhas ou
    colunas não mais usadas, mantendo os valores existentes -- note que o vetor
    deverá ser alocado e tratado dinamicamente em razão disso
+
    2) o usuário consulte as dimensões da imagem
 
    3) o usuário consiga (via um método - não use sobrecarga de operadores ainda)
@@ -39,4 +40,18 @@
    implementação. 
 */
 
+#include<iostream>
 
+class Point(){
+    int luminance;
+public:
+    Point(int);
+    int set(int);
+    int get();
+    ~Point();
+}
+
+Point::Point(int){}
+int Point::set(int){}
+int Point::get(){}
+Point::~Point(){}
