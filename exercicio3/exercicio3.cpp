@@ -42,16 +42,3 @@
 
 #include<iostream>
 
-class Point(){
-    int luminance;
-public:
-    Point(int);
-    int set(int);
-    int get();
-    ~Point();
-}
-
-Point::Point(int){}
-int Point::set(int){}
-int Point::get(){}
-Point::~Point(){}
