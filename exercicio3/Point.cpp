@@ -1,13 +1,13 @@
 #include "Point.h"
 
-Point::Point(unsigned luminance=0u): luminance(luminance) {}
+Point::Point(unsigned char luminance=0u): luminance(luminance) {}
 
-unsigned Point::set(unsigned luminance){
+unsigned char Point::set(unsigned char luminance){
     this->luminance = luminance;
 
     return luminance;
 }
-unsigned Point::get(){
+unsigned char Point::get(){
     return this->luminance;
 }
 // Point::~Point(){}
