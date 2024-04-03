@@ -12,8 +12,8 @@
 class Point{
     unsigned char luminance;
 public:
-    Point(unsigned char);
-    unsigned char set(unsigned char);
+    Point(unsigned char luminance=0u);
+    unsigned char set(unsigned char luminance);
     unsigned char get() const;
 //    ~Point();
 };
