@@ -41,21 +41,23 @@
 */
 
 #include<iostream>
+#include<sstream>
+#include<string>
 #include"Point.h"
 
 class Image: private Point {
     Point** image;
     unsigned width;
-    unsigned heigth;
+    unsigned height;
 public:
-    explicit Image(unsigned  width=0u, unsigned heigth=0u): width(width), heigth(heigth) {
-        image = new Point*[heigth];
-        for (unsigned n = 0; n < heigth; n++){
+    explicit Image(unsigned  width=0u, unsigned height=0u): width(width), height(height) {
+        image = new Point*[height];
+        for (unsigned n = 0; n < height; n++){
             image[n] = new Point[width];
         }
 
 //        for(unsigned n = 0; n++; n < width){
-//            for(unsigned m = 0; m++; m < heigth){
+//            for(unsigned m = 0; m++; m < height){
 //                image[n][m] = Point();
 //            }
 //        }
@@ -68,24 +70,24 @@ public:
         return image[row][column].set(luminance);
     }
 
-    unsigned get_heigth(void) const {return this->heigth;}
+    unsigned get_height(void) const {return this->height;}
     unsigned get_width(void) const {return this->width;}
 
     void delete_image() {
-        for(unsigned n = 0; n < heigth; n++){
+        for(unsigned n = 0; n < height; n++){
             delete[] image[n];
         }
     }
 
-    unsigned set_heigth(unsigned new_heigth){
-        Point** new_image = new Point*[new_heigth];
-        for(unsigned n = 0; n < new_heigth; n++){
+    unsigned set_height(unsigned new_height){
+        Point** new_image = new Point*[new_height];
+        for(unsigned n = 0; n < new_height; n++){
             new_image[n] = new Point[width];
         }
         
-        for(unsigned n = 0; n < new_heigth; n++){
+        for(unsigned n = 0; n < new_height; n++){
             for(unsigned m = 0; m < width; m++){
-                if(n < this->heigth){
+                if(n < this->height){
                     new_image[n][m] = Point(image[n][m]);
                 }
 //                else {
@@ -96,16 +98,16 @@ public:
 
         delete_image();
         image = new_image;
-        return this->heigth = new_heigth;
+        return this->height = new_height;
     }
 
     unsigned set_width(unsigned new_width){
-        Point** new_image = new Point*[heigth];
-        for(unsigned n = 0; n < heigth; n++){
+        Point** new_image = new Point*[height];
+        for(unsigned n = 0; n < height; n++){
             new_image[n] = new Point[new_width];
         }
         
-        for(unsigned n = 0; n < heigth; n++){
+        for(unsigned n = 0; n < height; n++){
             for(unsigned m = 0; m < new_width; m++){
                 if(m < this->width){
                     new_image[n][m] = Point(image[n][m]);
@@ -122,18 +124,44 @@ public:
     }
 
     void lum_invert(){
-        for(unsigned n = 0; n < heigth; n++) {
+        for(unsigned n = 0; n < height; n++) {
             for(unsigned m = 0; m < width; m++){
                 image[n][m].set(255u - image[n][m].get());
             }
         }
     }
 
-    int get_image() const{
-        return 0;
+std::string get_image() const {
+    std::ostringstream oss;
+
+    oss << '\n'; // Append newline character
+
+    // width + 1 for '\n' and +1 at the end for '\0'
+    for (unsigned n = 0; n < height; n++) {
+        for (unsigned m = 0; m < width; m++) {
+            unsigned char lum = image[n][m].get();
+
+            oss << "\e[38;2;" << (int)lum << ";" << (int)lum << ";" << (int)lum << "m#";
+        }
+        oss << '\n'; // Append newline character
     }
+
+    return oss.str(); // Return the string from stringstream
+}
+//        blackText="\e[38;2;0;0;0m"
+//        whiteText="\e[38;2;255;255;255m"
+//
 
     ~Image() {
         delete_image();
     }
 };
+
+
+int main(void){
+    Image img(100u, 100u);
+
+    std::cout << img.get_image() << std::endl;
+
+    return 0;
+}
