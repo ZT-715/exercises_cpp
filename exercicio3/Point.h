@@ -14,7 +14,7 @@ class Point{
 public:
     Point(unsigned char);
     unsigned char set(unsigned char);
-    unsigned char get();
+    unsigned char get() const;
 //    ~Point();
 };
 

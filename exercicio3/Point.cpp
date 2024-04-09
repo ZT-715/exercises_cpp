@@ -7,7 +7,7 @@ unsigned char Point::set(unsigned char luminance){
 
     return luminance;
 }
-unsigned char Point::get(){
+unsigned char Point::get() const{
     return this->luminance;
 }
 // Point::~Point(){}
