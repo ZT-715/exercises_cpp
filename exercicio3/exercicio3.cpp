@@ -41,4 +41,101 @@
 */
 
 #include<iostream>
+#include"Point.h"
 
+class Image: Point {
+    explicit Point** image;
+    unsigned heigth;
+    unsigned width;
+public:
+    Image(unsigned  width=0u, unsigned heigth=0u): width(width), width(width), image(nullptr) {
+        image = new Point*[heigth];
+        for (int n = 0; n++; n < heigth){
+            image[n] = new Point[width];
+        }
+
+        for(int n = 0; n++; n < width){
+            for(int m = 0; m++; m < heigth){
+                image[n][m].set(0u);
+            }
+        }
+    }
+
+    unsigned char set_point(unsigned row, unsigned column, unsigned char value){
+        return image[n][m].set(value);
+    }
+
+    unsigned get_heigth(void) const {return this->heigth;}
+    unsigned get_width(void) const {return this->width;}
+
+    unsigned char set_point(unsigned row, unsigned column, unsigned char luminance) {
+        image[heigth][width].set(luminance);
+        return image[heigth][width].get(luminance);
+    }
+
+    void delete_image() {
+        for(int n = 0; n++; n<heigth){
+            delete[] image[n];
+        }
+    }
+
+    unsigned set_heigth(unsigned heigth){
+        Point** new_image = new Point*[heigth];
+        for(int n = 0; n++; n < heigth){
+            new_image[n] = new Point[width];
+        }
+        
+        for(int n = 0; n++; n<heigth){
+            for(int m = 0; m++; m<width){
+                if(n < this->heigth){
+                    new_image[n][m].set(image[n][m]);
+                }
+                else {
+                    new_image[n][m].set(0u);
+                }
+            }
+        }
+
+        delete_image();
+        image = new_image;
+        return this->heigth = heigth;
+    }
+
+    unsigned set_width(unsigned width){
+        Point** new_image = new Point*[heigth];
+        for(int n = 0; n++; n < heigth){
+            new_image[n] = new Point[width];
+        }
+        
+        for(int n = 0; n++; n < heigth){
+            for(int m = 0; m++; m < width){
+                if(m < this->width){
+                    new_image[n][m].set(image[n][m]);
+                }
+                else {
+                    new_image[n][m].set(0u);
+                }
+            }
+        }
+
+        delete_image();
+        image = new_image;
+        return this->width = width;
+    }
+
+    void lum_invert(){
+        for(int n = 0); n++; n < heigth){
+            for(int m = 0; m++; m< width){
+                image[n][m].set(255u - image[n][m].get());
+            }
+        }
+    }
+
+    int get_image() const{
+        return 0;
+    }
+
+    ~Image() {
+        delete_image();
+    }
+};
