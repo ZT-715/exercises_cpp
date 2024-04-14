@@ -48,10 +48,14 @@ using namespace std;
 int main(void){
     int choice {0};
     Image image{40u,10u};
+    
+    unsigned column, row;
+    unsigned luminance;
+    unsigned new_width, new_height;
 
     cout << "Example image created:" << endl;
 
-    while(choice != 7){
+    while(choice != 9){
 
         cout << endl << image.get_image() << endl;
 
@@ -60,10 +64,12 @@ int main(void){
         cout << "1 - Get height" << endl;
         cout << "2 - Get width" << endl;
         cout << "3 - Set height" << endl;
-        cout << "4 - Set width" << endl;
-        cout << "5 - Set random" << endl;
-        cout << "6 - Lum invert" << endl;
-        cout << "7 - Exit" << endl;
+        cout << "4 - Get point luminance" << endl;
+        cout << "5 - Set width" << endl;
+        cout << "6 - Set point luminance" << endl;
+        cout << "7 - Set random" << endl;
+        cout << "8 - Lum invert" << endl;
+        cout << "9 - Exit" << endl;
         cout << "###############"  << endl << endl;
 
         cin >> choice;
@@ -74,24 +80,37 @@ int main(void){
             case 2:
                 cout << "Width: " << image.get_width() << endl;
                 break;
-            case 3: {
-                unsigned new_height;
+            case 3: 
                 cout << "Enter new height: ";
                 cin >> new_height;
                 image.set_height(new_height);
                 break;
-            }
-            case 4: {
-                unsigned new_width;
+            case 4: 
+                cout << "Point row: "; 
+                cin >> row;
+                cout << "Point column: ";
+                cin >> column;
+                cout << "Point luminance is: " << (unsigned)image.get_point(row, column) << endl;
+                break;
+            case 5: {
                 cout << "Enter new width: ";
                 cin >> new_width;
                 image.set_width(new_width);
                 break;
             }
-            case 5:
+            case 6: 
+                cout << "Point row: "; 
+                cin >> row;
+                cout << "Point column: ";
+                cin >> column;
+                cout << "New luminance value (0 to 255): ";
+                cin >> luminance;
+                image.set_point(row, column, (unsigned char)luminance);
+                break;
+            case 7:
                 image.set_random();
                 break;
-            case 6:
+            case 8:
                 image.lum_invert();
                 break;
             default:
