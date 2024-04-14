@@ -43,12 +43,60 @@
 #include<iostream>
 #include"Image.h"
 
+using namespace std;
+
 int main(void){
-    Image img(40u, 10u);
+    int choice {0};
+    Image image{40u,10u};
 
-    img.set_random();
+    cout << "Example image created:" << endl;
 
-    std::cout << img.get_image() << std::endl;
+    while(choice != 7){
 
+        cout << endl << image.get_image() << endl;
+
+        cout  << "\e[38;2;" << 180 << ";" << 180 << ";" << 180 << "m";
+        cout << "#####Menu######" << endl;
+        cout << "1 - Get height" << endl;
+        cout << "2 - Get width" << endl;
+        cout << "3 - Set height" << endl;
+        cout << "4 - Set width" << endl;
+        cout << "5 - Set random" << endl;
+        cout << "6 - Lum invert" << endl;
+        cout << "7 - Exit" << endl;
+        cout << "###############"  << endl << endl;
+
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                cout << "Height: " << image.get_height() << endl;
+                break;
+            case 2:
+                cout << "Width: " << image.get_width() << endl;
+                break;
+            case 3: {
+                unsigned new_height;
+                cout << "Enter new height: ";
+                cin >> new_height;
+                image.set_height(new_height);
+                break;
+            }
+            case 4: {
+                unsigned new_width;
+                cout << "Enter new width: ";
+                cin >> new_width;
+                image.set_width(new_width);
+                break;
+            }
+            case 5:
+                image.set_random();
+                break;
+            case 6:
+                image.lum_invert();
+                break;
+            default:
+                break;
+        }
+    }   
     return 0;
 }
