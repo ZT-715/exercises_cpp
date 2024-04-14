@@ -44,6 +44,8 @@
 #include<sstream>
 #include<string>
 #include"Point.h"
+#include<random>
+#include<ctime>
 
 class Image: private Point {
     Point** image;
@@ -55,12 +57,6 @@ public:
         for (unsigned n = 0; n < height; n++){
             image[n] = new Point[width];
         }
-
-//        for(unsigned n = 0; n++; n < width){
-//            for(unsigned m = 0; m++; m < height){
-//                image[n][m] = Point();
-//            }
-//        }
     }
 
     unsigned char get_point(unsigned row, unsigned column){
@@ -78,6 +74,17 @@ public:
             delete[] image[n];
         }
     }
+
+    void set_random(){
+        std::srand(std::time(nullptr));
+
+        for(unsigned n = 0; n < height; n++){
+            for(unsigned m = 0; m < width; m++){
+                    image[n][m].set_rand();
+            }
+        }
+    }
+
 
     unsigned set_height(unsigned new_height){
         Point** new_image = new Point*[new_height];
@@ -134,19 +141,19 @@ public:
 std::string get_image() const {
     std::ostringstream oss;
 
-    oss << '\n'; // Append newline character
+    oss << '\n';
 
-    // width + 1 for '\n' and +1 at the end for '\0'
+    
     for (unsigned n = 0; n < height; n++) {
         for (unsigned m = 0; m < width; m++) {
             unsigned char lum = image[n][m].get();
 
             oss << "\e[38;2;" << (int)lum << ";" << (int)lum << ";" << (int)lum << "m#";
         }
-        oss << '\n'; // Append newline character
+        oss << '\n'; 
     }
 
-    return oss.str(); // Return the string from stringstream
+    return oss.str();
 }
 //        blackText="\e[38;2;0;0;0m"
 //        whiteText="\e[38;2;255;255;255m"
@@ -159,7 +166,9 @@ std::string get_image() const {
 
 
 int main(void){
-    Image img(100u, 100u);
+    Image img(40u, 10u);
+
+    img.set_random();
 
     std::cout << img.get_image() << std::endl;
 

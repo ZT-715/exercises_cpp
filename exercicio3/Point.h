@@ -13,6 +13,7 @@ class Point{
     unsigned char luminance;
 public:
     Point(unsigned char luminance=0u);
+    unsigned char set_rand();
     unsigned char set(unsigned char luminance);
     unsigned char get() const;
 //    ~Point();
