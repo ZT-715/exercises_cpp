@@ -10,12 +10,12 @@
  *   o tamanho anterior da FILO seja ultrapassado, será necessário alocar mais
  *   memória; no caso da remoção, só libere memória e faça a readequação da área
  *   anteriormente alocada caso existam mais de 50% de elementos livres.
- * 3) consultar o valor de um elemento em uma posição válida, arbitrária, da
+ * V 3) consultar o valor de um elemento em uma posição válida, arbitrária, da
  *   FILO, via operador sobrescrito
- * 4) alterar o valor de um elemento em uma posição válida, arbitrária, da FILO,
+ * V 4) alterar o valor de um elemento em uma posição válida, arbitrária, da FILO,
  *    via operador sobrescrito
  * V 5) retornar a soma de todos os valores atualmente inseridos na FILO.
- * 6) operador sobrescrito que permita a conversão do valor de uma posição da
+ * V 6) operador sobrescrito que permita a conversão do valor de uma posição da
  *   FILO para uma std::string
  * 7) ex:ceções adequadas que indiquem erros no uso da classe
  * 8) Uma função main() que permita exemplificar a operação da classe. 
@@ -26,6 +26,7 @@
 
 
 #include<stdexcept>
+#include<string>
 
 class FILO {
     private:
@@ -36,14 +37,12 @@ class FILO {
         FILO(int size); 
         FILO(const FILO& copy);
         FILO& operator=(const FILO& copy);         
+        int& operator[](int index);
+        std::string operator[](int index) const;
 
         FILO& add(int a);                 
         int pop(); 
-
-//      TODO: 
-//      sobreescrever  [] para atribuição e leitura
-
-        int sum();
+        int sum() const;
         ~FILO();
 };
 
