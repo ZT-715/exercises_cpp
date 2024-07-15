@@ -34,7 +34,7 @@ int main() {
 
         // Modificação de um elemento na cópia
         filo2[2] = 100;
-        cout << "Atribuição: filo2[2] = 100." << endl;
+        std::cout << "Atribuição: filo2[2] = 100." << std::endl;
 
         // Exibição dos elementos do FILO original e da cópia
         std::cout << "Elementos do FILO original:" << std::endl;
