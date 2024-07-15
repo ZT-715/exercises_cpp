@@ -21,6 +21,10 @@
  * 8) Uma função main() que permita exemplificar a operação da classe. 
 */
 
+#ifndef FILO_HPP
+#define FILO_HPP
+
+
 #include<stdexcept>
 
 class FILO {
@@ -29,85 +33,18 @@ class FILO {
         int* head;
 
     public:
-        FILO(int size): size{size} {
-            if(size < 0) {
-                throw std::invalid_argument("FILO size must not be negative.");
-            } 
-            head = new int[size];         
-        }
+        FILO(int size); 
+        FILO(const FILO& copy);
+        FILO& operator=(const FILO& copy);         
 
-        FILO(const FILO& copy): size{copy.size}, top{copy.top} {
-            head = new int[copy.size];
-
-            for(int i; i < top; i++){
-                head[i] = copy.head[i];
-            }
-
-        }
-        FILO operator&=(const FILO& copy) {
-            delete [] head;
-            
-            top = copy.top;
-            size = copy.size;
-            head = new int[copy.size];
-
-            for(int i; i < top; i++){
-                head[i] = copy.head[i];
-            }
-
-        }
-        
-        FILO& add(int a) {
-            if(top + 1 > size){
-                int new_size = size + 1 + size/2;
-                int* new_head = new int[new_size];
-
-                for (int i = 0; i < top; i++)
-                    new_head[i] = head[i];
-
-                delete [] head;
-
-                head = new_head;
-                size = new_size;
-            }
-
-            head[top++] = a;
-            return *this;
-        }
-                
-        int pop() {
-            int a = head[top];
-
-            if (size/2 > top) {
-                int new_size = size/2;
-                int* new_head = new int[new_size];
-
-                for (int i = 0; i < top; i++)
-                    new_head[i] = head[i];
-
-                delete [] head;
-
-                head = new_head;
-                size = new_size;
-            }
-
-            return a;
-        }
+        FILO& add(int a);                 
+        int pop(); 
 
 //      TODO: 
 //      sobreescrever  [] para atribuição e leitura
 
-        int sum() {
-            int s = 0;
-
-            for(int i = 0; i < top; i++) {
-                s += head[i];
-            }
-            
-            return s;
-        } 
-
-        ~FILO() {
-            delete [] head;
-        }
+        int sum();
+        ~FILO();
 };
+
+#endif
