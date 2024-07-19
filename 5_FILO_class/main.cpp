@@ -10,7 +10,7 @@ int main() {
         filo1.add(10).add(20).add(30).add(40).add(50);
 
         // Exibição dos elementos do FILO
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 5; i++) {
             std::cout << "filo1[" << i << "] = " << filo1[i] << std::endl;
         }
 
@@ -22,7 +22,7 @@ int main() {
         std::cout << "Elemento removido: " << filo1.pop() << std::endl;
 
         // Exibição dos elementos do FILO após remoção
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; i++) {
             std::cout << "filo1[" << i << "] = " << filo1[i] << std::endl;
         }
 
@@ -49,19 +49,25 @@ int main() {
 
         // Exibição dos elementos do FILO original e das cópias
         std::cout << "Elementos do FILO original:" << std::endl;
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; i++) {
             std::cout << "filo1[" << i << "] = " << filo1[i] << std::endl;
         }
 
         std::cout << "Elementos da cópia do FILO:" << std::endl;
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; i++) {
             std::cout << "filo2[" << i << "] = " << filo2[i] << std::endl;
         }
         
         std::cout << "Elementos da 2a cópia do FILO:" << std::endl;
-        for (int i = 0; i < 6; ++i) {
+        for (int i = 0; i < 6; i++) {
             std::cout << "filo3[" << i << "] = " << filo3[i] << std::endl;
         }
+
+        // Testando ordem de remoção de elementos
+        std::cout << "Remoção de elementos da FILO3: " << std::endl;
+        for (int i = 0; i < 6; i++){
+            std::cout << i << ". filo3.pop() = " << filo3.pop() << std::endl;
+        };
         
         // Testando exceção ao acessar um índice inválido
         try {

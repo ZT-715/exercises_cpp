@@ -67,6 +67,10 @@ FILO& FILO::add(int a) {
 }
         
 int FILO::pop() {
+    if (top < 0){
+        throw std::out_of_range("No more elements in the FILO.");
+    }
+
     int a = head[--top];
 
     if (size/2 > top) {
