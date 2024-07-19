@@ -36,7 +36,18 @@ int main() {
         filo2[2] = 100;
         std::cout << "Atribuição: filo2[2] = 100." << std::endl;
 
-        // Exibição dos elementos do FILO original e da cópia
+        // Criação de uma cópia do FILO
+        FILO filo3 = filo2;
+
+        // Modificação de um elemento na cópia
+        filo3[3] = 100;
+        std::cout << "Atribuição: filo3[3] = 100." << std::endl;
+
+        // Adição de valores além da memória alocada no construtor
+        filo3.add(100).add(50);
+        std::cout << "Adição: filo3.add(100).add(50)." << std::endl;
+
+        // Exibição dos elementos do FILO original e das cópias
         std::cout << "Elementos do FILO original:" << std::endl;
         for (int i = 0; i < 4; ++i) {
             std::cout << "filo1[" << i << "] = " << filo1[i] << std::endl;
@@ -45,6 +56,11 @@ int main() {
         std::cout << "Elementos da cópia do FILO:" << std::endl;
         for (int i = 0; i < 4; ++i) {
             std::cout << "filo2[" << i << "] = " << filo2[i] << std::endl;
+        }
+        
+        std::cout << "Elementos da 2a cópia do FILO:" << std::endl;
+        for (int i = 0; i < 6; ++i) {
+            std::cout << "filo3[" << i << "] = " << filo3[i] << std::endl;
         }
         
         // Testando exceção ao acessar um índice inválido
